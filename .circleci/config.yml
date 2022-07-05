@@ -2,23 +2,28 @@ version: 2.1
 defaults: &defaults
   docker:
     - image: circleci/node:13.8.0
-  steps:
-    - checkout
 orbs:
   welcome: circleci/welcome-orb@0.4.1
 jobs:
   build:
-    <<: *defaults
-      - run:
-          name: "build-lint-job"
-          command: npm run lint
+    docker:
+        - image: circleci/node:13.8.0
+    steps:
+        - run:
+            name: "build-lint-job"
+            command: npm run lint
   test:
-    <<: *defaults
+    docker:
+        - image: circleci/node:13.8.0
+    steps:
       - run:
           name: "test-job"
           command: npm run test
   analyze:
-    <<: *defaults
+    docker:
+        - image: circleci/node:13.8.0
+    steps:
+
       - run:
           name: "analyze-audit-job"
           command: npm run test
